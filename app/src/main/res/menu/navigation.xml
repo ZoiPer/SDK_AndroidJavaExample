@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mute"
+        android:icon="@android:drawable/stat_notify_call_mute"
+        android:title="@string/title_mute"/>
+
+</menu>

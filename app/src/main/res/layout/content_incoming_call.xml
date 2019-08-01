@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".incoming.IncomingCallActivity"
+    tools:showIn="@layout/activity_incoming_call">
+
+    <TextView
+        android:id="@+id/waiting_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center"
+        android:text="@string/waiting_for_call"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <RelativeLayout
+        android:id="@+id/incoming_call_layout_base"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="80dp"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/waiting_textview">
+
+        <TextView
+            android:id="@+id/incoming_from_textview"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:text="@string/incoming_call_from"
+            android:textColor="@color/primary_text_color"
+            android:textSize="18sp"
+            android:textStyle="italic"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/speaker_button"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_alignStart="@+id/incoming_from_textview"
+            android:layout_alignLeft="@+id/incoming_from_textview"
+            android:layout_alignTop="@+id/mute_button"
+            android:background="@color/colorPrimary"
+            android:drawableTop="@drawable/baseline_volume_up_24"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/speaker"
+            android:textColor="@color/primary_text_color"
+            android:textSize="12sp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/mute_button"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/incoming_from_textview"
+            android:layout_alignEnd="@+id/incoming_from_textview"
+            android:layout_alignRight="@+id/incoming_from_textview"
+            android:background="@color/colorPrimary"
+            android:drawableTop="@drawable/baseline_headset_24"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/mute"
+            android:textColor="@color/primary_text_color"
+            android:textSize="12sp"/>
+
+        <ImageButton
+            android:id="@+id/button_answer_call"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_alignStart="@+id/incoming_from_textview"
+            android:layout_alignLeft="@+id/incoming_from_textview"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:background="@color/colorPrimary"
+            app:srcCompat="@drawable/baseline_call_24"/>
+
+        <ImageButton
+            android:id="@+id/button_hangup"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_alignTop="@+id/button_answer_call"
+            android:layout_alignEnd="@+id/incoming_from_textview"
+            android:layout_alignRight="@+id/incoming_from_textview"
+            android:background="@color/colorPrimary"
+            app:srcCompat="@drawable/baseline_call_end_24"/>
+
+        <TextView
+            android:id="@+id/incoming_call_status"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_above="@id/button_hangup"
+            android:layout_alignStart="@+id/incoming_from_textview"
+            android:layout_marginBottom="17dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:textColor="@color/primary_text_color"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_alignLeft="@+id/incoming_from_textview"/>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

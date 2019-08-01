@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_margin="10dp"
+    android:padding="5dp"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:id="@+id/call_item_count"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/primary_text_color"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/call_item_status"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/status"
+        android:textColor="@color/primary_text_color"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/call_item_count"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/call_item_name"
+        />
+
+    <TextView
+        android:id="@+id/call_item_name"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/name"
+        android:textColor="@color/primary_text_color"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/call_item_count"
+        app:layout_constraintTop_toBottomOf="@id/call_item_status"
+        />
+
+    <TextView
+        android:id="@+id/call_item_mute"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:drawableTop="@drawable/baseline_volume_mute_24"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/mute"
+        android:textColor="@color/primary_text_color"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.150"
+        app:layout_constraintStart_toEndOf="@id/call_item_name"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/call_item_remove"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:drawableTop="@drawable/baseline_close_24"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/remove"
+        android:textColor="@color/primary_text_color"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/call_item_mute"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+</android.support.constraint.ConstraintLayout>

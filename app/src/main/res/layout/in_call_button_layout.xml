@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_gravity="bottom"
+    android:background="@color/colorPrimary"
+    android:gravity="center"
+    android:orientation="horizontal"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/in_call_mute_button"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:drawableTop="@drawable/baseline_volume_mute_24"
+        android:drawableTint="#ffffff"
+        android:drawablePadding="5dp"
+        android:text="Mute"
+        android:textColor="#ffffff"
+        android:textSize="10sp"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/in_call_transfer_button"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:drawableTop="@drawable/baseline_phone_forwarded_24"
+        android:drawableTint="#ffffff"
+        android:drawablePadding="5dp"
+        android:text="Transfer"
+        android:textColor="#ffffff"
+        android:textSize="10sp"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/in_call_hold_button"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:drawableTop="@drawable/baseline_phone_paused_24"
+        android:drawableTint="#ffffff"
+        android:drawablePadding="5dp"
+        android:text="Hold"
+        android:textColor="#ffffff"
+        android:textSize="10sp"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/in_call_record_button"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="80dp"
+        android:drawablePadding="5dp"
+        android:layout_height="match_parent"
+        android:drawableTop="@drawable/baseline_play_circle_outline_24"
+        android:drawableTint="#ffffff"
+        android:text="Record"
+        android:textColor="#ffffff"
+        android:textSize="10sp"/>
+
+</android.support.v7.widget.LinearLayoutCompat>

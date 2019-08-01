@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Zdk Android Demo</string>
+    <string name="title_activity_make_call">MakeCallActivity</string>
+    <string name="title_activity_in_call">InCallActivity</string>
+    <string name="title_mute">Mute</string>
+    <string name="title_activity_in_messages">InMessagesActivity</string>
+    <string name="title_activity_incoming">IncomingActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="waiting_for_call">Waiting for call ...</string>
+    <string name="incoming_call_from">Incoming call from: </string>
+    <string name="speaker">Speaker</string>
+    <string name="mute">Mute</string>
+    <string name="ringing">Ringing</string>
+    <string name="enter_number">Enter number ...</string>
+    <string name="call">Call</string>
+    <string name="video_call">Video call</string>
+    <string name="message">Message</string>
+    <string name="incoming">Incoming</string>
+    <string name="title_activity_conference">ConferenceActivity</string>
+    <string name="conference">Conference</string>
+    <string name="name">Name</string>
+    <string name="remove">Remove</string>
+    <string name="add_call">Add call</string>
+    <string name="status">Status</string>
+    <string name="context_not_running">Zoiper context not running</string>
+    <string name="probe">Probe</string>
+    <string name="title_activity_sip_transport_probe">SipTransportProbe</string>
+    <string name="sip_transport_probe">Sip transport probe</string>
+    <string name="udp">UDP :</string>
+    <string name="tls">TLS :</string>
+    <string name="tcp">TCP :</string>
+    <string name="title_activity_dtmf">DTMFActivity</string>
+    <string name="dtmf">DTMF</string>
+
+</resources>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_calls_cl_main"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:paddingTop="16dp">
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/card_calls_et_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:hint="@string/enter_number"
+        android:maxLines="1"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_calls_guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_calls_guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.67" />
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/card_calls_btn_dial"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:text="@string/call"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/card_calls_btn_dial_video"
+        app:layout_constraintEnd_toStartOf="@+id/card_calls_guideline1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/card_calls_btn_dial_video" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/card_calls_btn_dial_video"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:text="@string/video_call"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/card_calls_guideline2"
+        app:layout_constraintStart_toStartOf="@+id/card_calls_guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/card_calls_et_number" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/card_calls_btn_messaging"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:text="@string/message"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/card_calls_btn_dial_video"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/card_calls_guideline2"
+        app:layout_constraintTop_toTopOf="@+id/card_calls_btn_dial_video" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/profile_card_btn_incoming"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:text="@string/incoming"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/card_calls_guideline1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_calls_btn_dial" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/profile_card_btn_conference"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:text="@string/conference"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/card_calls_guideline2"
+        app:layout_constraintStart_toStartOf="@+id/card_calls_guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/card_calls_btn_dial_video" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/profile_card_btn_probe"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:text="@string/probe"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/card_calls_guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/card_calls_btn_messaging" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/profile_card_btn_dtmf"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:text="@string/dtmf"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/card_calls_guideline1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_card_btn_incoming" />
+
+
+</android.support.constraint.ConstraintLayout>

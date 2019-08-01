@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+                                              android:layout_width="match_parent"
+                                              android:layout_height="wrap_content"
+                                              android:clipToPadding="false"
+                                              android:orientation="vertical"
+                                              android:paddingVertical="10dp"
+                                              android:paddingLeft="15dp"
+                                              android:paddingRight="60dp">
+
+    <TextView
+        android:id="@+id/incoming_message_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingBottom="4dp"
+        android:textSize="15sp"
+        android:text="Ivan"/>
+
+
+    <TextView
+        android:id="@+id/incoming_message_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|start"
+        android:background="@drawable/message_incoming"
+        android:padding="10dp"
+        android:text="Placeholder message"
+        android:textColor="#fff"
+        android:textSize="15dp"
+        />
+
+    <TextView
+        android:id="@+id/incoming_message_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|start"
+        android:layout_margin="5dp"
+        android:text="11:40"
+        android:textSize="10sp"/>
+
+
+</android.support.v7.widget.LinearLayoutCompat>
