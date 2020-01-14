@@ -8,14 +8,6 @@
 
 This guide is here to assist software developers to create a VoIP application with the use of Zoiper SDK 2.0. With this guide you will get an overview of the entities in the SDK and some examples of their implementation, usage and configurataion.
 
-You will find sections for each of the following:
-
-- Windows Microsoft .Net Framework
-- Windows Java
-- Linux Java
-- Android Java
-- iOS Objective C/Swift
-
 ## Licensing
 
 Zoiper SDK 2.0 requires a license which can be purchased from Zoiper. There are two possibilities:
