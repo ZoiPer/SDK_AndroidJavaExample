@@ -135,7 +135,7 @@ public class ConferenceAdapter extends RecyclerView.Adapter<ConferenceAdapter.Co
 
         void bind(Conference conference) {
             tvCount.setText(String.valueOf(getItemCount()));
-            tvName.setText(conference.calleeName());
+
             tvAddCall.setOnClickListener(v -> promptCreateCall.promptCreateCall(conference));
             tvRemove.setOnClickListener(v -> conference.hangUp());
 

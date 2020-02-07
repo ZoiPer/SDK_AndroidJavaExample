@@ -23,6 +23,7 @@ import com.zoiper.zdk.Providers.AccountProvider;
 import com.zoiper.zdk.Result;
 import com.zoiper.zdk.Types.AccountStatus;
 import com.zoiper.zdk.Types.AudioVideoCodecs;
+import com.zoiper.zdk.Types.LoggingLevel;
 import com.zoiper.zdk.Types.OwnershipChange;
 import com.zoiper.zdk.Types.ProtocolType;
 import com.zoiper.zdk.Types.RPortType;
@@ -40,6 +41,7 @@ import com.zoiper.zdk.android.demo.dtmf.DTMFActivity;
 import com.zoiper.zdk.android.demo.incoming.IncomingCallActivity;
 import com.zoiper.zdk.android.demo.messages.InMessagesActivity;
 import com.zoiper.zdk.android.demo.probe.SipTransportProbe;
+import com.zoiper.zdk.android.demo.util.LoggingUtils;
 import com.zoiper.zdk.android.demo.video.InVideoCallActivity;
 
 import java.util.ArrayList;
@@ -70,9 +72,13 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
     private Button btnProbe;
     private Button btnDTMF;
 
+    private Button btnStartLog;
+
     // ZDK
     private Context zdkContext;
     private Account account;
+
+    private boolean logStarted = false;
 
     private void printStatus(String status) {
         if (tvStatus != null) {
@@ -90,7 +96,7 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
     }
 
     @Override
-    public void onZoiperLoaded() {
+    public void onZDKLoaded() {
         zdkContext = getZdkContext();
         btnCreate.setOnClickListener(v -> createAccount());
     }
@@ -113,6 +119,7 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
         btnConference = findViewById(R.id.profile_card_btn_conference);
         btnProbe = findViewById(R.id.profile_card_btn_probe);
         btnDTMF = findViewById(R.id.profile_card_btn_dtmf);
+        btnStartLog = findViewById(R.id.profile_card_btn_log);
     }
 
     private void printError(String error) {
@@ -142,6 +149,23 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
         btnConference.setOnClickListener(v -> startConferenceActivity());
         btnProbe.setOnClickListener(v -> startSipTransportProbe());
         btnDTMF.setOnClickListener(v -> startDTMFActivity());
+        btnStartLog.setOnClickListener(v -> startLogging());
+    }
+
+    private void startLogging() {
+        if (logStarted) {
+            btnStartLog.setText(R.string.start_log);
+            logStarted = false;
+            Toast.makeText(this, "Logging stopped !", Toast.LENGTH_LONG).show();
+        } else {
+            String filename = LoggingUtils.generateDebugLogFilename(this);
+
+            zdkContext.logger().logOpen(filename, "", LoggingLevel.Stack, 0);
+
+            btnStartLog.setText(R.string.stop_log);
+            logStarted = true;
+            Toast.makeText(this, "Logging started !", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void startDTMFActivity() {
@@ -159,7 +183,7 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
     }
 
     private void startConferenceActivity() {
-        if (checkRegistration()) {
+        if (checkRegistration() && checkNumberEntered()) {
             startActivity(ConferenceActivity.class);
         }
     }
@@ -450,11 +474,6 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
     @Override
     public void onAccountChatMessageReceived(Account account, String s, String s1) {
         Log.d(TAG, "onAccountChatMessageReceived");
-    }
-
-    @Override
-    public void onAccountPushTokenReceived(Account account, String s) {
-        Log.d(TAG, "onAccountPushTokenReceived");
     }
 
     @Override

@@ -30,7 +30,7 @@ public class VideoCallEventsHandler implements com.zoiper.zdk.EventHandlers.Call
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.printStatusThreadSafe(callStatus.lineStatus().toString());
         }
-        if(callStatus.lineStatus() == CallLineStatus.Terminated) activity.runOnUiThread(activity::finish);
+        if(callStatus.lineStatus() == CallLineStatus.Terminated) activity.runOnUiThread(activity::delayedFinish);
     }
 
     @Override

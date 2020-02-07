@@ -1,0 +1,28 @@
+.title {
+        font-weight: bold;
+        font-family: 'Roboto', sans-serif;
+        font-size: 25px;
+}
+.line {
+       font-weight: normal;
+       font-family: 'Roboto', sans-serif;
+   }
+.line.parent {
+   font-size: 20px;
+   margin:2%;
+}
+.line.inside {
+        font-size: 18px;
+        margin:1%;
+    }
+body {
+background:white
+
+}
+
+.image {
+        width:45%;
+        height:auto;
+        margin-top:1%;
+        margin-bottom:1%;
+}

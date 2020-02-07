@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.zoiper.zdk.Account;
@@ -28,6 +27,8 @@ public class ConferenceActivity extends BaseActivity implements CallEventsHandle
     private ConferenceAdapter conferenceAdapter;
     private Account account;
 
+    private ConferencesListener conferencesListener = new ConferencesListener();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,20 +36,26 @@ public class ConferenceActivity extends BaseActivity implements CallEventsHandle
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if(getSupportActionBar() != null){
-            getSupportActionBar().setTitle(R.string.conference);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
+        setupActionbar(getString(R.string.conference));
         setupViews();
     }
 
     @Override
-    public void onZoiperLoaded() {
+    public void onZDKLoaded() {
+        getZdkContext()
+                .conferenceProvider()
+                .addConferenceProviderListener(conferencesListener);
+
         long accountID = getIntent().getLongExtra(MainActivity.INTENT_EXTRA_ACCOUNT_ID, 0);
         account = getAccount(accountID);
 
-        getZdkContext().conferenceProvider().addConferenceProviderListener(new ConferencesListener());
+        String number = getIntent().getStringExtra(MainActivity.INTENT_EXTRA_NUMBER);
+        if(number != null){
+            Call call = account.createCall(number, false, false);
+            createConference(call);
+        }else{
+            promptCreateConference();
+        }
     }
 
     private void setupViews() {
@@ -57,9 +64,6 @@ public class ConferenceActivity extends BaseActivity implements CallEventsHandle
         findViewById(R.id.fab_add_conference).setOnClickListener(v -> promptCreateConference());
     }
 
-    /**
-     * Setup the conference recycler view.
-     */
     private void setupConferenceRecycler() {
         RecyclerView recyclerViewConferences = findViewById(R.id.recycler_view_conferences);
 
@@ -73,8 +77,6 @@ public class ConferenceActivity extends BaseActivity implements CallEventsHandle
 
         recyclerViewConferences.setAdapter(conferenceAdapter);
         recyclerViewConferences.setLayoutManager(linearLayoutManager);
-        // Add initial conference.
-        promptCreateConference();
     }
 
     private void promptAddCall(Conference conference){
@@ -92,14 +94,12 @@ public class ConferenceActivity extends BaseActivity implements CallEventsHandle
                 account.createCall(number, false, false)
             ),
             () -> {
-                if (conferenceAdapter.getItemCount() == 0) finish();
+                if (conferenceAdapter.getItemCount() == 0) delayedFinish();
             }
         );
     }
 
-    /**
-     * Add a new conference. We also set a {@link ConferenceEventsHandler}.
-     */
+    /** Add a new conference. We also set a {@link ConferenceEventsHandler}. */
     private void promptCreateConference() {
         final Context zdkContext = getZdkContext();
         // First check if the ZDK context is running.
@@ -110,9 +110,7 @@ public class ConferenceActivity extends BaseActivity implements CallEventsHandle
         }
     }
 
-    /**
-     * @param call The conference needs to have at least one call to begin with
-     */
+    /** @param call The conference needs to have at least one call to begin with */
     private void createConference(Call call) {
         ArrayList<Call> calls = new ArrayList<>();
         calls.add(call);
@@ -122,13 +120,12 @@ public class ConferenceActivity extends BaseActivity implements CallEventsHandle
     private class ConferencesListener implements ConferenceProviderEventsHandler{
         @Override
         public void onConferenceAdded(ConferenceProvider confProvider, Conference conference) {
-            Log.d("VesiTesting", "onConferenceAdded");
             updateAdapter();
         }
 
         @Override
         public void onConferenceRemoved(ConferenceProvider confProvider, Conference conference) {
-            Log.d("VesiTesting", "onConferenceRemoved");
+            if(getZdkContext().conferenceProvider().listConferences().size() == 0) delayedFinish();
             updateAdapter();
         }
 

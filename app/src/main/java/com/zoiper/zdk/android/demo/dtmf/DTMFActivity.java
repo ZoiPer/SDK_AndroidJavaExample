@@ -75,7 +75,7 @@ public class DTMFActivity extends BaseActivity implements CallEventsHandler, Acc
     }
 
     @Override
-    public void onZoiperLoaded() {
+    public void onZDKLoaded() {
         number = getIntent().getStringExtra(MainActivity.INTENT_EXTRA_NUMBER);
         // Setup account for DTMF
         setupAccount();
@@ -151,18 +151,19 @@ public class DTMFActivity extends BaseActivity implements CallEventsHandler, Acc
 
         // Dialpad
         findViewById(R.id.buttonDelete).setOnClickListener(v -> deleteDigit());
-        findViewById(R.id.buttonStar).setOnClickListener((v) -> enterDigit("*"));
-        findViewById(R.id.buttonHash).setOnClickListener((v) -> enterDigit("#"));
-        findViewById(R.id.button0).setOnClickListener((v) -> enterDigit("0"));
-        findViewById(R.id.button1).setOnClickListener((v) -> enterDigit("1"));
-        findViewById(R.id.button2).setOnClickListener((v) -> enterDigit("2"));
-        findViewById(R.id.button3).setOnClickListener((v) -> enterDigit("3"));
-        findViewById(R.id.button4).setOnClickListener((v) -> enterDigit("4"));
-        findViewById(R.id.button5).setOnClickListener((v) -> enterDigit("5"));
-        findViewById(R.id.button6).setOnClickListener((v) -> enterDigit("6"));
-        findViewById(R.id.button7).setOnClickListener((v) -> enterDigit("7"));
-        findViewById(R.id.button8).setOnClickListener((v) -> enterDigit("8"));
-        findViewById(R.id.button9).setOnClickListener((v) -> enterDigit("9"));
+        findViewById(R.id.buttonStar).setOnClickListener(v -> enterDigit("*"));
+        findViewById(R.id.buttonHash).setOnClickListener(v -> enterDigit("#"));
+        findViewById(R.id.button0).setOnClickListener(v -> enterDigit("0"));
+        findViewById(R.id.button1).setOnClickListener(v -> enterDigit("1"));
+        findViewById(R.id.button2).setOnClickListener(v -> enterDigit("2"));
+        findViewById(R.id.button3).setOnClickListener(v -> enterDigit("3"));
+        findViewById(R.id.button4).setOnClickListener(v -> enterDigit("4"));
+        findViewById(R.id.button5).setOnClickListener(v -> enterDigit("5"));
+        findViewById(R.id.button6).setOnClickListener(v -> enterDigit("6"));
+        findViewById(R.id.button7).setOnClickListener(v -> enterDigit("7"));
+        findViewById(R.id.button8).setOnClickListener(v -> enterDigit("8"));
+
+        findViewById(R.id.button9).setOnClickListener(v -> enterDigit("9"));
     }
 
     /**
@@ -298,11 +299,6 @@ public class DTMFActivity extends BaseActivity implements CallEventsHandler, Acc
 
     @Override
     public void onAccountChatMessageReceived(Account account, String s, String s1) {
-
-    }
-
-    @Override
-    public void onAccountPushTokenReceived(Account account, String s) {
 
     }
 

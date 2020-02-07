@@ -30,6 +30,8 @@ import com.zoiper.zdk.android.demo.base.BaseActivity;
 import com.zoiper.zdk.android.demo.util.AudioModeUtils;
 import com.zoiper.zdk.android.demo.util.TextViewSelectionUtils;
 
+import java.util.List;
+
 /**
  * IncomingCallActivity
  *
@@ -42,20 +44,26 @@ public class IncomingCallActivity extends BaseActivity
     private View incomingCallLayoutBase;
 
     private TextView incomingFromTextView;
+
     private TextView waitingTextView;
+
     private TextView statusTextView;
+
     private TextView speakerButton;
+
     private TextView muteButton;
 
     private ImageButton answerButton;
+
     private ImageButton hangupButton;
 
     // ZDK
     private Account account;
-    private Call currentCall;
 
     // Android
     private Ringtone ringtone;
+
+    private long currentCallHandle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +76,12 @@ public class IncomingCallActivity extends BaseActivity
     }
 
     @Override
-    public void onZoiperLoaded() {
+    public void onZDKLoaded() {
         long accountId = getIntent().getLongExtra(MainActivity.INTENT_EXTRA_ACCOUNT_ID, 0);
         account = getAccount(accountId);
-        if(account != null) account.setStatusEventListener(this);
+        if (account != null) {
+            account.setStatusEventListener(this);
+        }
     }
 
     private void setupViews() {
@@ -104,6 +114,7 @@ public class IncomingCallActivity extends BaseActivity
     }
 
     private void onHangupButtonClicked() {
+        Call currentCall = getCallByHandle(currentCallHandle);
         if (currentCall != null) {
             currentCall.hangUp();
             AudioModeUtils.setAudioMode(this, AudioManager.MODE_NORMAL);
@@ -111,15 +122,14 @@ public class IncomingCallActivity extends BaseActivity
     }
 
     private void onAnswerButtonClicked() {
+        Call currentCall = getCallByHandle(currentCallHandle);
         if (currentCall != null) {
             currentCall.acceptCall();
-
-            // Workaround for bug
-            currentCall = account.getActiveCalls().get(0);
         }
     }
 
     private void onMuteButtonClicked(boolean selected) {
+        Call currentCall = getCallByHandle(currentCallHandle);
         if (currentCall != null) {
             boolean newSelectedState = !selected;
             currentCall.muted(newSelectedState);
@@ -128,6 +138,7 @@ public class IncomingCallActivity extends BaseActivity
     }
 
     private void onSpeakerButtonClicked(boolean selected) {
+        Call currentCall = getCallByHandle(currentCallHandle);
         if (currentCall != null) {
             boolean newSelectedState = !selected;
             currentCall.onSpeaker(newSelectedState);
@@ -151,23 +162,33 @@ public class IncomingCallActivity extends BaseActivity
         }
     }
 
-    /**
-     *
-     * @param call The incoming call.
-     */
-    private void onIncomingCall(Call call) {
-        this.currentCall = call;
+    private Call getCallByHandle(long callHandle) {
+        List<Call> calls = getZdkContext().callsProvider().calls();
+        for (Call call : calls) {
+            if (call.callHandle() == callHandle) {
+                return call;
+            }
+        }
+        return null;
+    }
+
+    private void onIncomingCall(long callHandle) {
         ring();
 
         statusTextView.setText(getString(R.string.ringing));
+
+        Call currentCall = getCallByHandle(callHandle);
         currentCall.setCallStatusListener(this);
 
         setupIncomingCallView();
 
         // Set caller name.
         String incomingName = getString(R.string.incoming_call_from) +
-                               "\n" + call.calleeName() +
-                               " (" + call.calleeNumber() + ")";
+                              "\n" +
+                              currentCall.calleeName() +
+                              " (" +
+                              currentCall.calleeNumber() +
+                              ")";
 
         incomingFromTextView.setText(incomingName);
         AudioModeUtils.setAudioMode(this, AudioManager.MODE_IN_COMMUNICATION);
@@ -192,16 +213,12 @@ public class IncomingCallActivity extends BaseActivity
 
     @Override
     public void onAccountIncomingCall(Account account, Call call) {
-        runOnUiThread(() -> onIncomingCall(call));
+        currentCallHandle = call.callHandle();
+        runOnUiThread(() -> onIncomingCall(currentCallHandle));
     }
 
     @Override
     public void onAccountChatMessageReceived(Account account, String s, String s1) {
-
-    }
-
-    @Override
-    public void onAccountPushTokenReceived(Account account, String s) {
 
     }
 
@@ -224,9 +241,14 @@ public class IncomingCallActivity extends BaseActivity
 
     @Override
     public void onCallStatusChanged(Call call, CallStatus callStatus) {
-        runOnUiThread(() -> statusTextView.setText(callStatus.lineStatus().toString()));
+        String lineStatus = callStatus.lineStatus().toString();
+        runOnUiThread(() -> statusTextView.setText(lineStatus));
         if (!callStatus.lineStatus().equals(CallLineStatus.Ringing)) {
             runOnUiThread(() -> ringtone.stop());
+        }
+        if (callStatus.lineStatus().equals(CallLineStatus.Terminated)) {
+            getCallByHandle(currentCallHandle).dropCallStatusListener(this);
+            runOnUiThread(this::delayedFinish);
         }
     }
 

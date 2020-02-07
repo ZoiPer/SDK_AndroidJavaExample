@@ -50,7 +50,7 @@ import java.util.List;
  */
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class InVideoCallActivity extends BaseActivity {
-    private static final String TAG = "VesiTesting";
+    private static final String TAG = "VideoCall";
 
     private static final I420Helper.ImageDimensions CAPTURE_DIMENSIONS = new I420Helper.ImageDimensions(640, 480);
 
@@ -91,7 +91,7 @@ public class InVideoCallActivity extends BaseActivity {
     }
 
     @Override
-    public void onZoiperLoaded() {
+    public void onZDKLoaded() {
         zdkContext = getZdkContext();
 
         try {

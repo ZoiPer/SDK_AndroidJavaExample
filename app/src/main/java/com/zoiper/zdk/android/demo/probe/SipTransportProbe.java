@@ -34,7 +34,7 @@ public class SipTransportProbe extends BaseActivity implements SIPProbeEventsHan
     }
 
     @Override
-    public void onZoiperLoaded() {
+    public void onZDKLoaded() {
         long accountId = getIntent().getLongExtra(MainActivity.INTENT_EXTRA_ACCOUNT_ID, 0);
         account = getAccount(accountId);
         if(account == null) return;

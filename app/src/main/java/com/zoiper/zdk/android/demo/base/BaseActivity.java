@@ -2,6 +2,7 @@ package com.zoiper.zdk.android.demo.base;
 
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,21 +29,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        permissionHelper = new PermissionHelper(this, this::onPermissionReady);
+        // Check for the permissions and then listen for ZDK loaded
+        permissionHelper = new PermissionHelper(this, this::listenForZdkContextLoaded);
     }
 
-    /**
-     * Make every action bar have a navigate up arrow and a title
-     */
+    /** Make every action bar have a navigate up arrow and a title */
     protected void setupActionbar(String title){
         final ActionBar supportActionBar = getSupportActionBar();
         if(supportActionBar == null) throw new RuntimeException("Run setSupportActionBar");
         supportActionBar.setDisplayHomeAsUpEnabled(true);
         supportActionBar.setTitle(title);
-    }
-
-    private void onPermissionReady() {
-        listenForZdkContextLoaded();
     }
 
     /**
@@ -55,7 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         if (getMainApplication().isZdkActivated()){
             // Optimization - if zoiper was already loaded, skip spawning a new thread
-            this.onZoiperLoaded();
+            this.onZDKLoaded();
             return;
         }
         // Wait for the zdk context to get activated on a background thread
@@ -104,16 +100,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         permissionHelper.onRequestPermissionsResult(requestCode);
     }
 
-    /**
-     * Called when the ZDK context has successfully started
-     */
-    public void onZoiperLoaded() {}
+    /** Called when the ZDK context has successfully started */
+    public void onZDKLoaded() {}
 
     /**
      * Called when the ZDK context fails to start in time.
      * The time is {@link ZdkContextWaitThread#ACTIVATION_TIMEOUT}
      */
-    public void onZoiperTimeout() {}
+    public void onZDKLoadTimeout() {}
 
     private class ZdkContextWaitThread extends Thread{
         private static final int ACTIVATION_TIMEOUT = 5 * 1000; // 5 seconds
@@ -128,21 +122,27 @@ public abstract class BaseActivity extends AppCompatActivity {
             while (!isZdkActivated()) {
                 try {
                     if ((System.currentTimeMillis() - startingPoint) > ACTIVATION_TIMEOUT) {
-                        runOnUiThread(BaseActivity.this::onZoiperTimeout);
+                        runOnUiThread(BaseActivity.this::onZDKLoadTimeout);
                         return;
                     }
                     Thread.sleep(100);
                 } catch (InterruptedException ignored) {
                     // In case the thread is interrupted before there is a result, notify failure
-                    runOnUiThread(BaseActivity.this::onZoiperTimeout);
+                    runOnUiThread(BaseActivity.this::onZDKLoadTimeout);
                 }
             }
             // Execute successful callback
-            runOnUiThread(BaseActivity.this::onZoiperLoaded);
+            runOnUiThread(BaseActivity.this::onZDKLoaded);
         }
     }
 
     public static String downloadsPath(){
         return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+    }
+
+    public void delayedFinish(){ delayedFinish(1000); }
+    @SuppressWarnings("SameParameterValue")
+    public void delayedFinish(long delay){
+        new Handler().postDelayed(this::finish, delay);
     }
 }

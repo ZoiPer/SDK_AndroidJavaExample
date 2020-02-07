@@ -60,7 +60,7 @@ public class InCallActivity extends BaseActivity implements CallEventsHandler {
     }
 
     @Override
-    public void onZoiperLoaded() {
+    public void onZDKLoaded() {
         long accountID = getIntent().getLongExtra(MainActivity.INTENT_EXTRA_ACCOUNT_ID, 0);
         String number = getIntent().getStringExtra(MainActivity.INTENT_EXTRA_NUMBER);
 
@@ -204,7 +204,7 @@ public class InCallActivity extends BaseActivity implements CallEventsHandler {
             runOnUiThread(() -> {
                 AudioModeUtils.setAudioMode(this,AudioManager.MODE_NORMAL);
                 durationTimer.cancel();
-                finish();
+                delayedFinish();
             });
         }
         if (status.lineStatus() == CallLineStatus.Active) {

@@ -50,7 +50,7 @@ public class InMessagesActivity extends BaseActivity
     }
 
     @Override
-    public void onZoiperLoaded() {
+    public void onZDKLoaded() {
         number = getIntent().getStringExtra(MainActivity.INTENT_EXTRA_NUMBER);
         long accountId = getIntent().getLongExtra(MainActivity.INTENT_EXTRA_ACCOUNT_ID, 0);
 
@@ -164,11 +164,6 @@ public class InMessagesActivity extends BaseActivity
     @Override
     public void onAccountChatMessageReceived(Account account, String s, String s1) {
         onNewMessage(s, s1);
-    }
-
-    @Override
-    public void onAccountPushTokenReceived(Account account, String s) {
-
     }
 
     @Override

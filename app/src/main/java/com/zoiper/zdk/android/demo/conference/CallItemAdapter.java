@@ -1,6 +1,8 @@
 package com.zoiper.zdk.android.demo.conference;
 
 import android.annotation.SuppressLint;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.zoiper.zdk.Call;
+import com.zoiper.zdk.CallStatus;
+import com.zoiper.zdk.EventHandlers.CallEventsHandler;
 import com.zoiper.zdk.android.demo.R;
 import com.zoiper.zdk.android.demo.util.TextViewSelectionUtils;
 
@@ -29,6 +33,9 @@ public class CallItemAdapter extends RecyclerView.Adapter<CallItemAdapter.CallHo
     private final MuteCall muteCall;
     private final UnmuteCall unmuteCall;
     private final RemoveCall removeCall;
+
+    // UI thread handler.
+    private Handler mainHandler = new Handler(Looper.getMainLooper());
 
     CallItemAdapter(List<Call> callsList,
                     MuteCall muteCall,
@@ -125,16 +132,28 @@ public class CallItemAdapter extends RecyclerView.Adapter<CallItemAdapter.CallHo
             tvRemove = itemView.findViewById(R.id.call_item_remove);
         }
 
+        void bindStatusView(Call call){
+            tvStatus.setText(call.status().lineStatus().toString());
+            call.setCallStatusListener(new CallEventsHandler() {
+                @Override
+                public void onCallStatusChanged(Call call, CallStatus status) {
+                    String lineStatus = status.lineStatus().toString();
+                    mainHandler.post(() -> tvStatus.setText(lineStatus));
+                }
+            });
+        }
+
         @SuppressLint("SetTextI18n")
         void bind(Call call) {
             tvName.setText(call.calleeName() + " (" + call.calleeNumber() + ")");
             tvCount.setText(String.valueOf(getItemCount()));
-            tvStatus.setText(call.status().lineStatus().toString());
 
             tvMute.setOnClickListener(view -> toggleMute(call, view));
             tvRemove.setOnClickListener(view -> {
                 if (removeCall != null) removeCall.removeCall(call);
             });
+
+            bindStatusView(call);
         }
     }
 }
