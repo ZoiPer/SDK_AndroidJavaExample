@@ -86,16 +86,29 @@ The SDK consists of an Android library with the respective headers that you can 
 |package/zdk.java-release.aar | The actual framework, which you need to import in your project. |
 
 
-.. image:: Screenshot_20191015-151658_Zdk Android Demo.jpg
-.. image:: Screenshot_20191015-151748_Zdk Android Demo.jpg
-.. image:: Screenshot_20191015-151817_Zdk Android Demo.jpg
-.. image:: Screenshot_20191015-152006_Zdk Android Demo.jpg
+## How to add ZDK to your project
+### 1. Create a new project.
+### 2. Create a new module from the .aar file
+- Go to File -> New -> New Module.
+- Choose "Import .Jar/.Aar package"
 
+![](./docs/import_aar.jpg)
 
-<center> 
-![](Screenshot_20191015-151658_Zdk Android Demo.jpg) ![](Screenshot_20191015-151748_Zdk Android Demo.jpg) 
-![](Screenshot_20191015-151817_Zdk Android Demo.jpg) ![](Screenshot_20191015-152006_Zdk Android Demo.jpg) </center>
+- Choose File location (The ZDK .aar file)
 
+![](./docs/import_module.jpg)
+
+### 3. Add the new module to the project.
+- Go to File -> Project structure -> Modules <app name>
+- "Dependencies" tab
+- Clink on the "+" sign
+- Choose "Module dependency"
+
+![](./docs/module_dependency.jpg)
+
+- Select the ZDK module and click "OK"
+
+![](./docs/choose_modules.jpg)
 
 ## Setting up the Demo project
 ### Default configuration
@@ -119,14 +132,14 @@ STUN: Disabled
 
 Before you can test the demo app, you need to activate the SDK. You will receive a username and password from Zoiper.com. 
 
-#####Manual 
+##### Manual 
 Enter the activation credentials before you build the application in assets/credentials.json. Please note: you might first need to rename the file to credentials.json. 
 
 When the activation is fine, the status will change to “Success”.  You can now start testing the demo app. 
 
 When the registration fails, you will receive a “Failed” status, followed by an error code. Please, check the status in the console log. 
 
-#####Hardcoded
+##### Hardcoded
 If you prefer hardcoded credentials, you can use  the following call:
 
 ```
