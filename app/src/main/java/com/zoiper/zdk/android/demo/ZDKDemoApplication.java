@@ -10,6 +10,7 @@ import com.zoiper.zdk.EventHandlers.ContextEventsHandler;
 import com.zoiper.zdk.Result;
 import com.zoiper.zdk.SecureCertData;
 import com.zoiper.zdk.Types.ActivationStatus;
+import com.zoiper.zdk.Types.CertificateError;
 import com.zoiper.zdk.Types.LoggingLevel;
 import com.zoiper.zdk.Types.ResultCode;
 import com.zoiper.zdk.Types.TLSSecureSuiteType;
@@ -96,8 +97,20 @@ public class ZDKDemoApplication extends Application implements ContextEventsHand
      */
     @Override
     public void onContextSecureCertError(Context context, SecureCertData secureCert) {
-        // TODO: Implement me adequately
-        throw new RuntimeException("Cert error");
+        // TODO("PLEASE IMPLEMENT ME ADEQUATELY!")
+        if(secureCert.errorMask() != CertificateError.None.ordinal()) {
+            mainHandler.post(() -> certificateError(secureCert));
+        }
+    }
+
+    private void certificateError(SecureCertData secureCert) {
+        Toast.makeText(this, "SecureCertError: expected= " + secureCert.expectedName() + ", got= " + secureCert.actualNameList(), Toast.LENGTH_LONG).show();
+
+        // TODO("PLEASE IMPLEMENT ME ADEQUATELY!")
+        // !!!!!!!!!!!SERIOUS NOTICE!!!!!!!!!!!
+        // Do this ONLY after USER request!!!
+        // The user should be warned that using exceptions makes TLS much less secure than they think it is.
+        zdkContext.encryptionConfiguration().addKnownCertificate(secureCert);
     }
 
     /**
