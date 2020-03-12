@@ -110,7 +110,7 @@ public class ZDKDemoApplication extends Application implements ContextEventsHand
         // !!!!!!!!!!!SERIOUS NOTICE!!!!!!!!!!!
         // Do this ONLY after USER request!!!
         // The user should be warned that using exceptions makes TLS much less secure than they think it is.
-        zdkContext.encryptionConfiguration().addKnownCertificate(secureCert);
+        zdkContext.encryptionConfiguration().addKnownCertificate(secureCert.certDataPEM());
     }
 
     /**
