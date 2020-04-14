@@ -96,7 +96,7 @@ public class ZDKDemoApplication extends Application implements ContextEventsHand
      * it to execute code on the main thread
      */
     @Override
-    public void onContextSecureCertError(Context context, SecureCertData secureCert) {
+    public void onContextSecureCertStatus(Context context, SecureCertData secureCert) {
         // TODO("PLEASE IMPLEMENT ME ADEQUATELY!")
         if(secureCert.errorMask() != CertificateError.None.ordinal()) {
             mainHandler.post(() -> certificateError(secureCert));
