@@ -75,7 +75,7 @@ The SDK consists of an Android library with the respective headers that you can 
 |Android Studio|Android Studio, Gradle configuration and Android API level of 16 or above (64 Bit requires API level 21 or above)|
 |Operating system (Development environment)|Windows, Linux|
 |Operating system (Runtime environment)|Android 4.1.3 or newer|
-|Architecture|armv7, arm64|
+|Architecture|armv7, arm64, x86, x86_64|
 |Mode|Live device|
 ### Contents of the SDK package
 
