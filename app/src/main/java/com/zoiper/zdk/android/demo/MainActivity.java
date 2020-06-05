@@ -205,16 +205,29 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
      * to the In call activity.
      */
     private void startCallActivity() {
-        if (checkRegistration() && checkNumberEntered()) {
-            startActivity(InCallActivity.class);
+        if (account != null) {
+            if (checkNumberEntered()) {
+                startActivity(InCallActivity.class);
+            } else {
+                printError("Fill in number to dial");
+            }
+        } else {
+            printError("Account not registered");
         }
     }
 
     private void startVideoCallActivity() {
-        if (checkRegistration() && checkNumberEntered()) {
-            startActivity(InVideoCallActivity.class);
+        if (account != null) {
+            if (checkNumberEntered()) {
+                startActivity(InVideoCallActivity.class);
+            } else {
+                printError("Fill in number to dial");
+            }
+        } else {
+            printError("Account not registered");
         }
     }
+
 
     /**
      * Checks if the current account status is {@link AccountStatus#Registered}.
