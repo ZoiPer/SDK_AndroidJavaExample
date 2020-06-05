@@ -236,6 +236,12 @@ public class InVideoCallActivity extends BaseActivity {
         });
     }
 
+    void printGeneralThreadSafe(String text) {
+        runOnUiThread(() -> {
+            Log.i(TAG, text);
+        });
+    }
+
     private void initViews() {
         svIn = findViewById(R.id.video_call_sv_in);
         svOut = findViewById(R.id.video_call_sv_out);

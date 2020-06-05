@@ -7,6 +7,7 @@ import com.zoiper.zdk.CallStatus;
 import com.zoiper.zdk.ExtendedError;
 import com.zoiper.zdk.NetworkStatistics;
 import com.zoiper.zdk.Types.CallLineStatus;
+import com.zoiper.zdk.Types.OriginType;
 import com.zoiper.zdk.Types.Zrtp.ZRTPAuthTag;
 import com.zoiper.zdk.Types.Zrtp.ZRTPCipherAlgorithm;
 import com.zoiper.zdk.Types.Zrtp.ZRTPHashAlgorithm;
@@ -81,5 +82,33 @@ public class VideoCallEventsHandler implements com.zoiper.zdk.EventHandlers.Call
     @Override
     public void onCallZrtpSecondaryError(Call call, int i, ExtendedError extendedError) {
 
+    }
+
+    @Override
+    public void onVideoStopped(Call call, OriginType origin) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.printGeneralThreadSafe("onVideoStopped: call= " + call.callHandle() + "; origin= " + origin.toString());
+        }
+    }
+
+    @Override
+    public void onVideoFormatSelected(Call call, OriginType dir, int width, int height, float fps) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.printGeneralThreadSafe("onVideoFormatSelected: call= ${call?.callHandle()}; dir= ${dir?.toString()}; res= ${width}x${height}@${fps}");
+        }
+    }
+
+    @Override
+    public void onVideoStarted(Call call, OriginType origin) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.printGeneralThreadSafe("onVideoStarted: call= " + call.callHandle() + "; origin= " + origin.toString());
+        }
+    }
+
+    @Override
+    public void onVideoCameraChanged(Call call) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.printGeneralThreadSafe("onVideoCameraChanged: call= " + call.callHandle());
+        }
     }
 }
