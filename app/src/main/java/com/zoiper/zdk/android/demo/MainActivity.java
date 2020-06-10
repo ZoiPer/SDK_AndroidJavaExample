@@ -391,6 +391,7 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
         codecs.add(AudioVideoCodecs.OPUS_WIDE);
         codecs.add(AudioVideoCodecs.PCMU);
         codecs.add(AudioVideoCodecs.vp8); // This is for the videocall
+        codecs.add(AudioVideoCodecs.h264); // This is for the videocall
         return codecs;
     }
 
@@ -518,8 +519,8 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
 
         private static final boolean ZRTP = false;
 
-        private static final boolean VIDEO_FMTP = false;
+        private static final boolean VIDEO_FMTP = true;
 
-        private static final boolean RTCP_FEEDBACK = false;
+        private static final boolean RTCP_FEEDBACK = true;
     }
 }
