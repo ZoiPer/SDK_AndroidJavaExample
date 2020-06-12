@@ -123,8 +123,10 @@ public class ZDKDemoApplication extends Application implements ContextEventsHand
      */
     @Override
     public void onContextActivationCompleted(Context context, ActivationResult activationResult) {
-        if(activationResult.status() == ActivationStatus.Success) mainHandler.post(this::activationSuccess);
-        if(activationResult.status() == ActivationStatus.Failed) {
+        if (activationResult.status() == ActivationStatus.Success) {
+            mainHandler.post(this::activationSuccess);
+        }
+        else {
             String reason = activationResult.reason();
             mainHandler.post(() -> this.activationFailed(reason));
         }
