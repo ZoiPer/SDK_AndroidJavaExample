@@ -28,6 +28,7 @@ import com.zoiper.zdk.Types.OwnershipChange;
 import com.zoiper.zdk.Types.ProtocolType;
 import com.zoiper.zdk.Types.RPortType;
 import com.zoiper.zdk.Types.RTCPFeedbackType;
+import com.zoiper.zdk.Types.ResultCode;
 import com.zoiper.zdk.Types.TransportType;
 import com.zoiper.zdk.Types.Zrtp.ZRTPAuthTag;
 import com.zoiper.zdk.Types.Zrtp.ZRTPCipherAlgorithm;
@@ -311,11 +312,12 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
 
     @SuppressWarnings("unused")
     private void registerUser() {
-        if (account.registrationStatus() != AccountStatus.Registered) {
-            Result createUserResult = account.createUser();
-            Result registerAccountResult = account.registerAccount();
+        if (account == null) {
+            createAccount();
+        }
 
-            zdkContext.accountProvider().setAsDefaultAccount(account);
+        if (account.registrationStatus() != AccountStatus.Registered) {
+            Result registerAccountResult = account.registerAccount();
         }
 
         printCurrentRegistrationStatus();
@@ -340,7 +342,7 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
             return;
         }
 
-        if(account != null){
+        if (account != null) {
             Toast.makeText(this, "Account already created.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -353,13 +355,21 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
         account.setStatusEventListener(this);
 
         // Account name - not to be confused with username
-        account.accountName(username);
+        String accountName = username + "@" + hostname;
+        account.accountName(accountName);
 
         // Configurations
         account.mediaCodecs(getAudioCodecs());
         account.configuration(createAccountConfig(accountProvider, hostname, username, password));
 
-        printStatus("Created");
+        Result createUserResult = account.createUser();
+        if (createUserResult.code()!= ResultCode.Ok) {
+            printStatus("Account creation failed with reason= " + createUserResult.text());
+        }
+        else {
+            zdkContext.accountProvider().setAsDefaultAccount(account);
+            printStatus("Created");
+        }
     }
 
     private AccountConfig createAccountConfig(AccountProvider ap,
