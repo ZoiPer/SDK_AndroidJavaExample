@@ -16,6 +16,7 @@ import com.zoiper.zdk.Types.ResultCode;
 import com.zoiper.zdk.Types.TLSSecureSuiteType;
 import com.zoiper.zdk.android.demo.network.NetworkChangeReceiver;
 import com.zoiper.zdk.android.demo.util.Credentials;
+import com.zoiper.zdk.android.demo.util.LoggingUtils;
 
 import java.io.File;
 
@@ -57,21 +58,16 @@ public class ZDKDemoApplication extends Application implements ContextEventsHand
         try{
             Context zdkContext = new Context(getApplicationContext());
 
-            File logFile = new File(getFilesDir(), "logs.txt");
+            String filename = LoggingUtils.generateDebugLogFilename(this);
 
-            zdkContext.logger().logOpen(
-                    logFile.getAbsolutePath(),
-                    null,
-                    LoggingLevel.Debug,
-                    0
-            );
+            zdkContext.logger().logOpen(filename, "", LoggingLevel.Stack, 0);
 
             // Make sure you have both
             // ACCESS_NETWORK_STATE
             // and
             // INTERNET
             // permissions!!!!!!!!!!!
-            zdkContext.configuration().sipPort(5060);
+            zdkContext.configuration().sipUdpPort(5060);
             //zdkContext.configuration().iaxPort();
             //zdkContext.configuration().rtpPort();
 

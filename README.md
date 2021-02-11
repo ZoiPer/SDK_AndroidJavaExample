@@ -306,7 +306,7 @@ Here you can find a sample of initializing the context:
             // and
             // INTERNET
             // permissions!!!!!!!!!!!
-            zdkContext.configuration().sipPort(5060);
+            zdkContext.configuration().sipUdpPort(5060);
             //zdkContext.configuration().iaxPort();
             //zdkContext.configuration().rtpPort();
 
