@@ -134,8 +134,17 @@ public class InCallActivity extends BaseActivity implements CallEventsHandler {
 
     private void acceptCallTransfer() {
         if(call == null) return;
-        call.acceptCallTransfer();
-        Toast.makeText(this, "Call transfer accepted", Toast.LENGTH_LONG).show();
+
+        Call transferedCall = call.acceptCallTransfer();
+        if(transferedCall != null)
+        {
+            call = transferedCall;
+            Toast.makeText(this, "Call transfer accepted", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            Toast.makeText(this, "Accepting call transfer FAILED!", Toast.LENGTH_LONG).show();
+        }
     }
 
 
