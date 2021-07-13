@@ -22,6 +22,7 @@ import com.zoiper.zdk.Types.AudioVideoCodecs;
 import com.zoiper.zdk.Types.CallLineStatus;
 import com.zoiper.zdk.Types.DTMFCodes;
 import com.zoiper.zdk.Types.DTMFTypeSIP;
+import com.zoiper.zdk.Types.NetworkQualityLevel;
 import com.zoiper.zdk.Types.OwnershipChange;
 import com.zoiper.zdk.Types.ProtocolType;
 import com.zoiper.zdk.Types.RPortType;
@@ -230,7 +231,7 @@ public class DTMFActivity extends BaseActivity implements CallEventsHandler, Acc
     }
 
     @Override
-    public void onCallNetworkQualityLevel(Call call, int i, int i1) {
+    public void onCallNetworkQualityLevel(Call call, int callChannel, NetworkQualityLevel qualityLevel) {
 
     }
 

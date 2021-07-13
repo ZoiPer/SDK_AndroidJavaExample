@@ -18,6 +18,7 @@ import com.zoiper.zdk.ExtendedError;
 import com.zoiper.zdk.NetworkStatistics;
 import com.zoiper.zdk.Types.AccountStatus;
 import com.zoiper.zdk.Types.CallLineStatus;
+import com.zoiper.zdk.Types.NetworkQualityLevel;
 import com.zoiper.zdk.Types.OwnershipChange;
 import com.zoiper.zdk.Types.Zrtp.ZRTPAuthTag;
 import com.zoiper.zdk.Types.Zrtp.ZRTPCipherAlgorithm;
@@ -263,7 +264,7 @@ public class IncomingCallActivity extends BaseActivity
     }
 
     @Override
-    public void onCallNetworkQualityLevel(Call call, int i, int i1) {
+    public void onCallNetworkQualityLevel(Call call, int callChannel, NetworkQualityLevel qualityLevel) {
 
     }
 

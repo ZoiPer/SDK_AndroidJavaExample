@@ -7,6 +7,7 @@ import com.zoiper.zdk.CallStatus;
 import com.zoiper.zdk.ExtendedError;
 import com.zoiper.zdk.NetworkStatistics;
 import com.zoiper.zdk.Types.CallLineStatus;
+import com.zoiper.zdk.Types.NetworkQualityLevel;
 import com.zoiper.zdk.Types.OriginType;
 import com.zoiper.zdk.Types.Zrtp.ZRTPAuthTag;
 import com.zoiper.zdk.Types.Zrtp.ZRTPCipherAlgorithm;
@@ -50,7 +51,7 @@ public class VideoCallEventsHandler implements com.zoiper.zdk.EventHandlers.Call
     }
 
     @Override
-    public void onCallNetworkQualityLevel(Call call, int i, int i1) {
+    public void onCallNetworkQualityLevel(Call call, int callChannel, NetworkQualityLevel qualityLevel) {
 
     }
 

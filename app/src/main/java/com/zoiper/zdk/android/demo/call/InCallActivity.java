@@ -14,6 +14,7 @@ import com.zoiper.zdk.ExtendedError;
 import com.zoiper.zdk.NetworkStatistics;
 import com.zoiper.zdk.Result;
 import com.zoiper.zdk.Types.CallLineStatus;
+import com.zoiper.zdk.Types.NetworkQualityLevel;
 import com.zoiper.zdk.Types.Zrtp.ZRTPAuthTag;
 import com.zoiper.zdk.Types.Zrtp.ZRTPCipherAlgorithm;
 import com.zoiper.zdk.Types.Zrtp.ZRTPHashAlgorithm;
@@ -232,7 +233,7 @@ public class InCallActivity extends BaseActivity implements CallEventsHandler {
     }
 
     @Override
-    public void onCallNetworkQualityLevel(Call call, int callChannel, int qualityLevel) {
+    public void onCallNetworkQualityLevel(Call call, int callChannel, NetworkQualityLevel qualityLevel) {
 
     }
 
