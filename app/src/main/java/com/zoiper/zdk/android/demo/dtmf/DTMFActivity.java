@@ -18,10 +18,11 @@ import com.zoiper.zdk.NetworkStatistics;
 import com.zoiper.zdk.Providers.AccountProvider;
 import com.zoiper.zdk.Result;
 import com.zoiper.zdk.Types.AccountStatus;
+import com.zoiper.zdk.Types.AudioOutputDeviceType;
 import com.zoiper.zdk.Types.AudioVideoCodecs;
 import com.zoiper.zdk.Types.CallLineStatus;
 import com.zoiper.zdk.Types.DTMFCodes;
-import com.zoiper.zdk.Types.DTMFTypeSIP;
+import com.zoiper.zdk.Types.DTMFType;
 import com.zoiper.zdk.Types.NetworkQualityLevel;
 import com.zoiper.zdk.Types.OwnershipChange;
 import com.zoiper.zdk.Types.ProtocolType;
@@ -42,7 +43,7 @@ import java.util.List;
 
 public class DTMFActivity extends BaseActivity implements CallEventsHandler, AccountEventsHandler {
 
-    public static final DTMFTypeSIP DTMF_TYPE = DTMFTypeSIP.SIP_info_numeric;
+    public static final DTMFType DTMF_TYPE = DTMFType.MediaOutband;
 
     // Login details to a DTMF-capable server
     public static final String USERNAME = setMe();
@@ -117,12 +118,13 @@ public class DTMFActivity extends BaseActivity implements CallEventsHandler, Acc
         accountConfig.sip().transport(TransportType.UDP);
 
         accountConfig.sip().domain(DOMAIN);
-        accountConfig.sip().dtmf(DTMF_TYPE);
 
         accountConfig.sip().rPort(RPortType.SignalingAndMedia);
 
         accountConfig.reregistrationTime(60);
 
+        accountConfig.dtmfBand(DTMF_TYPE);
+        accountConfig.dtmfAutoplayDevice(AudioOutputDeviceType.Normal);
 
         account.mediaCodecs(getAudioCodecs());
         account.setStatusEventListener(this);
@@ -189,7 +191,6 @@ public class DTMFActivity extends BaseActivity implements CallEventsHandler, Acc
         try {
             int digitInteger = Integer.valueOf(digit);
             if (call != null) {
-                call.playDTMFSound(DTMFCodes.fromInt(digitInteger));
                 call.sendDTMF(DTMFCodes.fromInt(digitInteger));
             }
         } catch (NumberFormatException e) {
