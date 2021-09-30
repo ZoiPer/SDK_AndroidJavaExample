@@ -60,7 +60,7 @@ public class ZDKDemoApplication extends Application implements ContextEventsHand
 
             String filename = LoggingUtils.generateDebugLogFilename(this);
 
-            zdkContext.logger().logOpen(filename, "", LoggingLevel.Stack, 0);
+            zdkContext.logger().logOpen(filename, "", LoggingLevel.Debug, 0);
 
             // Make sure you have both
             // ACCESS_NETWORK_STATE
