@@ -312,7 +312,6 @@ Here you can find a sample of initializing the context:
 
             zdkContext.configuration().enableSIPReliableProvisioning(false);
             zdkContext.encryptionConfiguration().tlsConfig().secureSuite(TLSSecureSuiteType.SSLv2_v3);
-            zdkContext.encryptionConfiguration().globalZrtpCache(getZrtpCacheFile().getAbsolutePath());
 
             return zdkContext;
         } catch (UnsatisfiedLinkError e) {

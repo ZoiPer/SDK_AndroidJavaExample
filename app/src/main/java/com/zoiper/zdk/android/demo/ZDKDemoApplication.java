@@ -73,7 +73,6 @@ public class ZDKDemoApplication extends Application implements ContextEventsHand
 
             zdkContext.configuration().enableSIPReliableProvisioning(false);
             zdkContext.encryptionConfiguration().tlsConfig().secureSuite(TLSSecureSuiteType.SSLv2_v3);
-            zdkContext.encryptionConfiguration().globalZrtpCache(getZrtpCacheFile().getAbsolutePath());
 
             return zdkContext;
         } catch (UnsatisfiedLinkError e) {
@@ -160,6 +159,8 @@ public class ZDKDemoApplication extends Application implements ContextEventsHand
                     NetworkChangeReceiver.intentFilter()
             );
         }
+
+        zdkContext.encryptionConfiguration().globalZrtpCache(getZrtpCacheFile().getAbsolutePath());
     }
 
     /**
