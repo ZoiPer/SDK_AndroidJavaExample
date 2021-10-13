@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_calls_cl_main"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +8,7 @@
     android:layout_gravity="center_horizontal"
     android:paddingTop="16dp">
 
-    <android.support.v7.widget.AppCompatEditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/card_calls_et_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -23,14 +23,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/card_calls_guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.33" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/card_calls_guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
         app:layout_constraintGuide_percent="0.67" />
 
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/card_calls_btn_dial"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
@@ -57,7 +57,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/card_calls_btn_dial_video" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/card_calls_btn_dial_video"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
@@ -75,7 +75,7 @@
         app:layout_constraintStart_toStartOf="@+id/card_calls_guideline1"
         app:layout_constraintTop_toBottomOf="@+id/card_calls_et_number" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/card_calls_btn_messaging"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
@@ -93,7 +93,7 @@
         app:layout_constraintStart_toStartOf="@+id/card_calls_guideline2"
         app:layout_constraintTop_toTopOf="@+id/card_calls_btn_dial_video" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/profile_card_btn_incoming"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
@@ -113,7 +113,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card_calls_btn_dial" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/profile_card_btn_conference"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
@@ -133,7 +133,7 @@
         app:layout_constraintStart_toStartOf="@+id/card_calls_guideline1"
         app:layout_constraintTop_toBottomOf="@+id/card_calls_btn_dial_video" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/profile_card_btn_probe"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
@@ -154,7 +154,7 @@
         app:layout_constraintStart_toStartOf="@+id/card_calls_guideline2"
         app:layout_constraintTop_toBottomOf="@+id/card_calls_btn_messaging" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/profile_card_btn_dtmf"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
@@ -174,7 +174,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_card_btn_incoming" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/profile_card_btn_log"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
@@ -196,4 +196,4 @@
 
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

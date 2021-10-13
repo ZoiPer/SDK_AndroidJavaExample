@@ -9,7 +9,7 @@
     tools:context=".messages.InMessagesActivity"
     tools:showIn="@layout/activity_in_messages">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messaging_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

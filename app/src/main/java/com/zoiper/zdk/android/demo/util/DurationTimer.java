@@ -1,7 +1,7 @@
 package com.zoiper.zdk.android.demo.util;
 
 import android.os.Handler;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.Timer;
 import java.util.TimerTask;

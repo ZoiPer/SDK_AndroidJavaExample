@@ -2,7 +2,7 @@ package com.zoiper.zdk.android.demo.dtmf;
 
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
