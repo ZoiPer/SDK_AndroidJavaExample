@@ -72,7 +72,7 @@ The SDK consists of an Android library with the respective headers that you can 
 |Processor|Intel Core i3 or better|
 |Memory|4GB (minimum) 8 GB (recommended)|
 |Hard disk space|1 GB|
-|Android Studio|Android Studio, Gradle configuration and Android API level of 16 or above (64 Bit requires API level 21 or above)|
+|Android Studio|Android Studio Arctic Fox 2020.3.1 Patch 3 or newer, Gradle configuration and Android API level of 16 or above (64 Bit requires API level 21 or above)|
 |Operating system (Development environment)|Windows, Linux|
 |Operating system (Runtime environment)|Android 4.1.3 or newer|
 |Architecture|armv7, arm64, x86, x86_64|
@@ -88,27 +88,47 @@ The SDK consists of an Android library with the respective headers that you can 
 
 ## How to add ZDK to your project
 ### 1. Create a new project.
-### 2. Create a new module from the .aar file
-- Go to File -> New -> New Module.
-- Choose "Import .Jar/.Aar package"
+### 2. Copy the downloaded zdk aar file.
 
-![](./docs/import_aar.jpg)
 
-- Choose File location (The ZDK .aar file)
+![](./docs/copy-downloaded-zdk.png)
 
-![](./docs/import_module.jpg)
+### 3. Change the project view in Android Studio to "Project".
 
-### 3. Add the new module to the project.
-- Go to File -> Project structure -> Modules <app name>
-- "Dependencies" tab
-- Clink on the "+" sign
-- Choose "Module dependency"
 
-![](./docs/module_dependency.jpg)
+![](./docs/change-project-view.png)
 
-- Select the ZDK module and click "OK"
+### 4. Paste the zdk aar file in libs directory.
 
-![](./docs/choose_modules.jpg)
+
+![](./docs/paste-zdk-to-libs-dir.png)
+
+Enter a name
+
+
+![](./docs/choose-a-name.png)
+
+### 5. Go to Android Studio "Project Structure".
+
+
+![](./docs/go-to-project-structure.png)
+
+### 6. In the "Modules" section select "+" to add dependency.
+
+
+![](./docs/add-aar-dependency.png)
+
+### 7. Enter the path to the zdk aar file.
+
+
+![](./docs/provide-zdk-path.png)
+
+Apply all changes to the Project Structure.
+
+### 9. Check build.gradle(app) file for the new added dependency.
+
+
+![](./docs/check-gradle-file.png)
 
 ## Setting up the Demo project
 ### Default configuration
