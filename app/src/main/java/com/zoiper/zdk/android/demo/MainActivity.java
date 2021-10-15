@@ -520,17 +520,11 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
     private class Configuration {
 
         private static final boolean PRIVACY = false;
-
         private static final boolean PRECONDITIONS = false;
-
-        private static final boolean STUN = false;
-
+        private static final boolean STUN = true;
         private static final boolean SRTP = false;
-
-        private static final boolean ZRTP = false;
-
+        private static final boolean ZRTP = true;
         private static final boolean VIDEO_FMTP = true;
-
-        private static final boolean RTCP_FEEDBACK = true;
+        private static final boolean RTCP_FEEDBACK = false;
     }
 }

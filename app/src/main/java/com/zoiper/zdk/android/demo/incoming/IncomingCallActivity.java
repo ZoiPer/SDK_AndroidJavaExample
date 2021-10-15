@@ -1,13 +1,18 @@
 package com.zoiper.zdk.android.demo.incoming;
 
+import android.content.DialogInterface;
 import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zoiper.zdk.Account;
 import com.zoiper.zdk.Call;
@@ -18,6 +23,8 @@ import com.zoiper.zdk.ExtendedError;
 import com.zoiper.zdk.NetworkStatistics;
 import com.zoiper.zdk.Types.AccountStatus;
 import com.zoiper.zdk.Types.CallLineStatus;
+import com.zoiper.zdk.Types.CallMediaChannel;
+import com.zoiper.zdk.Types.CallSecurityLevel;
 import com.zoiper.zdk.Types.NetworkQualityLevel;
 import com.zoiper.zdk.Types.OwnershipChange;
 import com.zoiper.zdk.Types.Zrtp.ZRTPAuthTag;
@@ -40,6 +47,8 @@ import java.util.List;
  */
 public class IncomingCallActivity extends BaseActivity
         implements AccountEventsHandler, CallEventsHandler {
+
+    private static final String TAG = "IncomingCallActivity";
 
     // UI
     private View incomingCallLayoutBase;
@@ -284,27 +293,46 @@ public class IncomingCallActivity extends BaseActivity
     }
 
     @Override
-    public void onCallZrtpFailed(Call call, ExtendedError extendedError) {
-
+    public void onCallZrtpFailed(Call call, ExtendedError error) {
+        Log.d(TAG, "onCallZrtpFailed: call= " + call.callHandle() + "; error= " + error.message());
     }
 
     @Override
-    public void onCallZrtpSuccess(Call call,
-                                  String s,
-                                  int i,
-                                  int i1,
-                                  int i2,
-                                  ZRTPSASEncoding zrtpsasEncoding,
-                                  String s1,
-                                  ZRTPHashAlgorithm zrtpHashAlgorithm,
-                                  ZRTPCipherAlgorithm zrtpCipherAlgorithm,
-                                  ZRTPAuthTag zrtpAuthTag,
-                                  ZRTPKeyAgreement zrtpKeyAgreement) {
+    public void onCallZrtpSuccess(Call call, String zidHex, int knownPeer, int cacheMismatch, int peerKnowsUs, ZRTPSASEncoding zrtpsasEncoding, String sas,
+                                  ZRTPHashAlgorithm zrtpHashAlgorithm, ZRTPCipherAlgorithm zrtpCipherAlgorithm, ZRTPAuthTag zrtpAuthTag, ZRTPKeyAgreement zrtpKeyAgreement) {
+        Log.d(TAG, "onCallZrtpSuccess: call= " + call.callHandle());
 
+        if ((knownPeer != 0) && (cacheMismatch == 0) && (peerKnowsUs != 0))
+        {
+            runOnUiThread(() -> call.confirmZrtpSas(true));
+        }
+        else
+        {
+            runOnUiThread(() -> new AlertDialog.Builder(this)
+                    .setTitle("SAS Verification")
+                    .setMessage("SAS Verification is \"" + sas + "\". Please compare the string with your peer!")
+                    .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            call.confirmZrtpSas(true);
+                        }
+                    })
+                    .setNegativeButton("Reject", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            call.confirmZrtpSas(false);
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show());
+        }
     }
 
     @Override
-    public void onCallZrtpSecondaryError(Call call, int i, ExtendedError extendedError) {
+    public void onCallZrtpSecondaryError(Call call, int channel, ExtendedError error) {
+        Log.d(TAG, "onCallZrtpSecondaryError: call= " + call.callHandle() + "; error= " + error.message());
+    }
 
+    @Override
+    public void onCallSecurityLevelChanged(Call call, CallMediaChannel channel, CallSecurityLevel level) {
+        Log.d(TAG, "OnCallSecurityLevelChanged channel: " + channel.toString() + " level: " + level.toString());
     }
 }

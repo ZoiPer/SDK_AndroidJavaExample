@@ -1,12 +1,18 @@
 package com.zoiper.zdk.android.demo.video;
 
+import android.content.DialogInterface;
 import android.os.Build;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.zoiper.zdk.Call;
 import com.zoiper.zdk.CallStatus;
 import com.zoiper.zdk.ExtendedError;
 import com.zoiper.zdk.NetworkStatistics;
 import com.zoiper.zdk.Types.CallLineStatus;
+import com.zoiper.zdk.Types.CallMediaChannel;
+import com.zoiper.zdk.Types.CallSecurityLevel;
 import com.zoiper.zdk.Types.NetworkQualityLevel;
 import com.zoiper.zdk.Types.OriginType;
 import com.zoiper.zdk.Types.Zrtp.ZRTPAuthTag;
@@ -14,6 +20,7 @@ import com.zoiper.zdk.Types.Zrtp.ZRTPCipherAlgorithm;
 import com.zoiper.zdk.Types.Zrtp.ZRTPHashAlgorithm;
 import com.zoiper.zdk.Types.Zrtp.ZRTPKeyAgreement;
 import com.zoiper.zdk.Types.Zrtp.ZRTPSASEncoding;
+import com.zoiper.zdk.android.demo.MainActivity;
 
 /**
  * VideoCallEventsHandler
@@ -71,18 +78,56 @@ public class VideoCallEventsHandler implements com.zoiper.zdk.EventHandlers.Call
     }
 
     @Override
-    public void onCallZrtpFailed(Call call, ExtendedError extendedError) {
-
+    public void onCallZrtpFailed(Call call, ExtendedError error) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.printGeneralThreadSafe("onCallZrtpFailed: call= " + call.callHandle() + "; error= " + error.message());
+        }
     }
 
     @Override
-    public void onCallZrtpSuccess(Call call, String s, int i, int i1, int i2, ZRTPSASEncoding zrtpsasEncoding, String s1, ZRTPHashAlgorithm zrtpHashAlgorithm, ZRTPCipherAlgorithm zrtpCipherAlgorithm, ZRTPAuthTag zrtpAuthTag, ZRTPKeyAgreement zrtpKeyAgreement) {
+    public void onCallZrtpSuccess(Call call, String zidHex, int knownPeer, int cacheMismatch, int peerKnowsUs, ZRTPSASEncoding zrtpsasEncoding, String sas,
+                                  ZRTPHashAlgorithm zrtpHashAlgorithm, ZRTPCipherAlgorithm zrtpCipherAlgorithm, ZRTPAuthTag zrtpAuthTag, ZRTPKeyAgreement zrtpKeyAgreement) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.printGeneralThreadSafe("onCallZrtpSuccess: call= " + call.callHandle());
+        }
 
+        if ((knownPeer != 0) && (cacheMismatch == 0) && (peerKnowsUs != 0))
+        {
+            activity.runOnUiThread(() -> call.confirmZrtpSas(true));
+        }
+        else
+        {
+            activity.runOnUiThread(() -> new AlertDialog.Builder(this.activity)
+                    .setTitle("SAS Verification")
+                    .setMessage("SAS Verification is \"" + sas + "\". Please compare the string with your peer!")
+                    .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            call.confirmZrtpSas(true);
+                        }
+                    })
+                    .setNegativeButton("Reject", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            call.confirmZrtpSas(false);
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show());
+        }
     }
 
     @Override
-    public void onCallZrtpSecondaryError(Call call, int i, ExtendedError extendedError) {
+    public void onCallZrtpSecondaryError(Call call, int channel, ExtendedError error) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.printGeneralThreadSafe("onCallZrtpSecondaryError: call= " + call.callHandle() + "; error= " + error.message());
+        }
+    }
 
+    @Override
+    public void onCallSecurityLevelChanged(Call call, CallMediaChannel channel, CallSecurityLevel level)
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.printGeneralThreadSafe("OnCallSecurityLevelChanged channel: " + channel.toString() + " level: " + level.toString());
+        }
     }
 
     @Override
