@@ -2,9 +2,7 @@ package com.zoiper.zdk.android.demo.video;
 
 import android.content.DialogInterface;
 import android.os.Build;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
-import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
 
 import com.zoiper.zdk.Call;
 import com.zoiper.zdk.CallStatus;
@@ -20,7 +18,6 @@ import com.zoiper.zdk.Types.Zrtp.ZRTPCipherAlgorithm;
 import com.zoiper.zdk.Types.Zrtp.ZRTPHashAlgorithm;
 import com.zoiper.zdk.Types.Zrtp.ZRTPKeyAgreement;
 import com.zoiper.zdk.Types.Zrtp.ZRTPSASEncoding;
-import com.zoiper.zdk.android.demo.MainActivity;
 
 /**
  * VideoCallEventsHandler

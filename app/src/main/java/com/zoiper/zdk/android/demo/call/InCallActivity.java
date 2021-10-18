@@ -2,9 +2,9 @@ package com.zoiper.zdk.android.demo.call;
 
 import android.content.DialogInterface;
 import android.media.AudioManager;
-import android.os.Build;
+
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -21,7 +21,7 @@ import com.zoiper.zdk.Types.CallLineStatus;
 import com.zoiper.zdk.Types.CallMediaChannel;
 import com.zoiper.zdk.Types.CallSecurityLevel;
 import com.zoiper.zdk.Types.NetworkQualityLevel;
-import com.zoiper.zdk.Types.ResultCode;
+
 import com.zoiper.zdk.Types.Zrtp.ZRTPAuthTag;
 import com.zoiper.zdk.Types.Zrtp.ZRTPCipherAlgorithm;
 import com.zoiper.zdk.Types.Zrtp.ZRTPHashAlgorithm;

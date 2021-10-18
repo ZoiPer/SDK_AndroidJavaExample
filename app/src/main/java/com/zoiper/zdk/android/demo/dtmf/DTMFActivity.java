@@ -4,11 +4,10 @@ import android.content.DialogInterface;
 import android.media.AudioManager;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zoiper.zdk.Account;
 import com.zoiper.zdk.Call;
