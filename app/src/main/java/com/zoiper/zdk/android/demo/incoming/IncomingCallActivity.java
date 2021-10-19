@@ -256,7 +256,6 @@ public class IncomingCallActivity extends BaseActivity
             runOnUiThread(() -> ringtone.stop());
         }
         if (callStatus.lineStatus().equals(CallLineStatus.Terminated)) {
-            getCallByHandle(currentCallHandle).dropCallStatusListener(this);
             runOnUiThread(this::delayedFinish);
         }
     }
