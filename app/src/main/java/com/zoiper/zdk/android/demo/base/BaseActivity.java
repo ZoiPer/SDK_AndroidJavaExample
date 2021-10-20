@@ -3,6 +3,9 @@ package com.zoiper.zdk.android.demo.base;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.util.Log;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.zoiper.zdk.Account;
 import com.zoiper.zdk.Context;
 import com.zoiper.zdk.Providers.AccountProvider;
+import com.zoiper.zdk.android.demo.R;
 import com.zoiper.zdk.android.demo.ZDKDemoApplication;
 import com.zoiper.zdk.android.demo.util.PermissionHelper;
 
@@ -31,6 +35,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onStart();
         // Check for the permissions and then listen for ZDK loaded
         permissionHelper = new PermissionHelper(this, this::listenForZdkContextLoaded);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /** Make every action bar have a navigate up arrow and a title */
