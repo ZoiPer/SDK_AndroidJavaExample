@@ -133,7 +133,9 @@ Apply all changes to the Project Structure.
 ## Setting up the Demo project
 ### Default configuration
 Transport type: TCP
-Enabled codecs: 
+
+Enabled codecs:
+
 - aLaw
 - uLaw
 - GSM
@@ -143,6 +145,7 @@ Enabled codecs:
 - VP8 
 
 STUN: Disabled
+
 - Default STUN settings:
 - Server: stun.zoiper.com
 - Port: 3478
@@ -186,13 +189,15 @@ Do not take your credentials from the GUI, but pass them. Please mind that the a
 ### Account registration
 
 You need a SIP account to register to the server and make calls. Configure it in 2 steps:
+
 1. Enter the details (username, password and hostname at least)
-1. Click on the „Register“ button 
+2. Click on the „Register“ button 
 
 The status screen will show the registration status. When the registration is successful, you should be able to make calls. If not, then the status screen will show an error code.
 
 ### Changing the project configuration
 To change the SIP configuration, you will need to adjust the calls in:
+
 ```
 private func createDefaultSIPConfiguration() -> ZDKSIPConfig
 ```
@@ -222,6 +227,7 @@ private StunConfig createStunConfig(AccountProvider ap){
 sipConfig.rPort(RPortType.Signaling);
 ```
 Possible values: 
+
 - No
 - Signaling
 - SingnalingAndMedia
@@ -231,6 +237,7 @@ Possible values:
 public static final DTMFTypeSIP DTMF_TYPE = DTMFTypeSIP.SIP_info_numeric;
 ```
 Possible values: 
+
 - .NA
 - .Inband
 - .RFC_2833
@@ -249,6 +256,7 @@ private List<AudioVideoCodecs> getAudioCodecs() {
 }
 ```
 Possible values:
+
 - NA
 - G729
 - GSM
@@ -342,6 +350,7 @@ Here you can find a sample of initializing the context:
 ```
 Keep in mind that inside the initialization the SIP and RTP ports will be also initialized.
 Right after the Zoiper SDK 2.0 is initialized, it is best to activate its license by using the activation username and password, provided to you by [Zoiper.com](https://www.zoiper.com/). The activation can be done by invoking the activateZDK method like so:
+
 ```
 zdkContext.activation().startSDK(
 	getCertCacheFile().getAbsolutePath(),
