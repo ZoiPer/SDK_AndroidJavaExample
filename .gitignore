@@ -18,7 +18,7 @@
 gradle/
 gradlew
 gradlew.bat
-gradle.properties
+!gradle.properties
 
 zdk.java-release/*.aar
 
