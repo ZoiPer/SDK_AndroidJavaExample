@@ -2,11 +2,10 @@ package com.zoiper.zdk.android.demo.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class LoggingUtils {
 
@@ -14,13 +13,15 @@ public class LoggingUtils {
 
     private static final String FILE_NAME = "logfile";
 
-    public static String generateDebugLogFilename(Context context) {
+    private static final String TRAILING_DASH = "/";
+
+    public static String generateDebugLogFilename(Context context) throws FileNotFoundException {
         java.util.Date date = new java.util.Date();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("_yyyyMMdd_HHmmss");
         StringBuilder sb = new StringBuilder(sdf.format(date));
-        String homeDirExternal = getHomeDirExternal();
-        createDir(context, homeDirExternal);
+        String homeDirExternal = getHomeDirExternal(context);
         String filename = homeDirExternal +
+                          TRAILING_DASH +
                           FILE_NAME +
                           sb +
                           ".txt";
@@ -28,22 +29,12 @@ public class LoggingUtils {
         return filename;
     }
 
-    private static void createDir(Context context, String homeDirExternal) {
-        File dir = new File(homeDirExternal);
-        if (!dir.exists()) {
-            boolean mkdir = dir.mkdir();
-            if (!mkdir) {
-                Toast.makeText(context,"Could not create folder",Toast.LENGTH_LONG).show();
-            }
+    private static String getHomeDirExternal(Context context) throws FileNotFoundException {
+        File dir = context.getExternalFilesDir(null);
+        if (dir == null) {
+            throw new FileNotFoundException("Unable to access application external directory.");
         }
-    }
-
-    /**
-     * Application external home folder where various logs are stored.
-     * It can be accessed via pc, from other apps and the user
-     */
-    private static String getHomeDirExternal() {
-        return Environment.getExternalStorageDirectory().getPath() +"/zdk_demo/";
+        return dir.getPath();
     }
 
     private static void saveDebugLogFilename(Context context, String filename) {

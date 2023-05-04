@@ -45,6 +45,7 @@ import com.zoiper.zdk.android.demo.probe.SipTransportProbe;
 import com.zoiper.zdk.android.demo.util.LoggingUtils;
 import com.zoiper.zdk.android.demo.video.InVideoCallActivity;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -159,7 +160,13 @@ public class MainActivity extends BaseActivity implements AccountEventsHandler {
             logStarted = false;
             Toast.makeText(this, "Logging stopped !", Toast.LENGTH_LONG).show();
         } else {
-            String filename = LoggingUtils.generateDebugLogFilename(this);
+            String filename = null;
+            try {
+                filename = LoggingUtils.generateDebugLogFilename(this);
+            } catch (FileNotFoundException e) {
+                Toast.makeText(this, "Cannot start log: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                return;
+            }
 
             zdkContext.logger().logOpen(filename, "", LoggingLevel.Stack, 0);
 

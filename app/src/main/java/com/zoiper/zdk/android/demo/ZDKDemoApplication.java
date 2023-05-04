@@ -19,6 +19,7 @@ import com.zoiper.zdk.android.demo.util.Credentials;
 import com.zoiper.zdk.android.demo.util.LoggingUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * ZDKDemoApplication
@@ -58,9 +59,12 @@ public class ZDKDemoApplication extends Application implements ContextEventsHand
         try{
             Context zdkContext = new Context(getApplicationContext());
 
-            String filename = LoggingUtils.generateDebugLogFilename(this);
-
-            zdkContext.logger().logOpen(filename, "", LoggingLevel.Debug, 0);
+            try {
+                String filename = LoggingUtils.generateDebugLogFilename(this);
+                zdkContext.logger().logOpen(filename, "", LoggingLevel.Debug, 0);
+            } catch (FileNotFoundException e) {
+                Toast.makeText(this, "Cannot start log: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
 
             // Make sure you have both
             // ACCESS_NETWORK_STATE
