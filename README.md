@@ -48,7 +48,6 @@ The SDK is (partially) built with:
 - Resiprocate, The Vovida license The Vovida Software License, Version 1.0, Copyright (C) 2000 Vovida Networks, Inc. All rights reserved.
 - This product includes cryptographic software written by Eric Young (eay@cryptsoft.com).
 - This product includes software written by Tim Hudson (tjh@cryptsoft.com).
-- This product is using the gloox XMPP library - Copyright by Jakob Schroeter.
 
 Please contact [<span style="color:orange">sales@zoiper.com</span>](mailto:sales@zoiper.com) for more information.
 
