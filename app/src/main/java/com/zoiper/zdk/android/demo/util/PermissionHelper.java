@@ -46,8 +46,7 @@ public class PermissionHelper {
         ActivityCompat.requestPermissions(activity,
                                           new String[] {Manifest.permission.CAMERA,
                                                         Manifest.permission.CALL_PHONE,
-                                                        Manifest.permission.RECORD_AUDIO,
-                                                        Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                                        Manifest.permission.RECORD_AUDIO},
                                           PERMISSIONS_REQUEST);
     }
 
@@ -66,8 +65,7 @@ public class PermissionHelper {
     private boolean hasAllPermissions() {
         return hasPermission(Manifest.permission.CAMERA) &&
                hasPermission(Manifest.permission.CALL_PHONE) &&
-               hasPermission(Manifest.permission.RECORD_AUDIO) &&
-               hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+               hasPermission(Manifest.permission.RECORD_AUDIO);
     }
 
     private void onPermissionsAvailable() {
