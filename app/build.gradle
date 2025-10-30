@@ -1,11 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
+
+    namespace = "com.zoiper.zdk.android.demo"
+
+    compileSdkVersion 35
     defaultConfig {
         applicationId "com.zoiper.zdk.android.demo"
-        minSdkVersion 17
-        targetSdkVersion 31
+        minSdkVersion 23
+        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
